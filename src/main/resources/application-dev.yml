@@ -1,0 +1,9 @@
+---
+# DEV PROFILE #
+spring:
+  datasource:
+    url: "jdbc:mysql://localhost:3310/bosch_db"
+    username: "root"
+    password: "Macika42"
+  liquibase:
+    drop-first: true

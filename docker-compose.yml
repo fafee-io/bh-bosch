@@ -1,0 +1,55 @@
+---
+version: "3.7"
+services:
+
+  # DATABASES
+  bosch-mysql:
+    image: bitnami/mysql:latest
+    restart: always
+    volumes:
+      - bosch-sql-data:/bitnami/mysql/data
+    ports:
+      - "127.0.0.1:3310:3306"
+    container_name: bosch-mysql
+    environment:
+      MYSQL_ROOT_PASSWORD: "Macika42"
+      MYSQL_DATABASE: "bosch_db"
+      MYSQL_CHARACTER_SET: "utf8mb4"
+      MYSQL_COLLATE: "utf8mb4_unicode_ci"
+
+#  tomcat:
+#    image: bitnami/tomcat:9.0.63
+#    restart: always
+#    volumes:
+#      - tmx-tomcat:/bitnami
+#    ports:
+#      - "127.0.0.1:8080:8080"
+#    container_name: tomcat
+#    environment:
+#      TOMCAT_PASSWORD: "Macika42"
+#      TOMCAT_ALLOW_REMOTE_MANAGEMENT: "true"
+
+  # ENVIRONMENT
+#  service-registry:
+#    container_name: service-registry
+#    image: docker-registry.loginet.hu/instacash/instacash/service-registry:latest
+#    volumes:
+#      - ~/dev/fintrous/docker:/root/logs
+#    ports:
+#      - "127.0.0.1:8761:8761"
+#
+#  gateway:
+#    container_name: gateway
+#    image: docker-registry.loginet.hu/instacash/instacash/gateway:latest
+#    volumes:
+#      - ~/dev/fintrous/docker:/root/logs
+#    ports:
+#      - "8888:8080"
+#    environment:
+#      EUREKA_URI: http://service-registry:8761/eureka
+#    depends_on:
+#      - service-registry
+
+volumes:
+  bosch-sql-data:
+    name: bosch-sql-data
