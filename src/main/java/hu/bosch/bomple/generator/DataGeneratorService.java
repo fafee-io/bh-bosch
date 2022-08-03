@@ -74,7 +74,7 @@ public class DataGeneratorService {
                 ship.setPosition(position);
 
                 int armamentCount = secretService.nextInt(20);
-                List<ArmamentEmbeddable> armaments = new ArrayList<>();
+                Set<ArmamentEmbeddable> armaments = new HashSet<>();
                 for (int j = 0; j < armamentCount; ++j) {
                     ArmamentEmbeddable armament = new ArmamentEmbeddable();
                     armament.setName(choose(armaPool));
@@ -101,7 +101,7 @@ public class DataGeneratorService {
                 assignment.setStart(Instant.now().minus(secretService.nextInt(500), ChronoUnit.DAYS));
                 assignment.setShip(shipRepository.findById((long)secretService.nextInt(29) + 1).get());
                 assignment.setCrew(crewRepository.findById((long)secretService.nextInt(999) + 1).get());
-                if (secretService.nextInt(10) >= 7) {
+                if (secretService.nextInt(10) >= 8) {
                     assignment.setEnd(Instant.now());
                 }
                 assignments.add(assignment);

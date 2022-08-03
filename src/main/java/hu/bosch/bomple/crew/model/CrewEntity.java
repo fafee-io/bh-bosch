@@ -1,5 +1,6 @@
 package hu.bosch.bomple.crew.model;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import hu.bosch.bomple.common.BaseEntity;
 import hu.bosch.bomple.crew.enums.Division;
 import hu.bosch.bomple.crew.enums.Rank;
@@ -44,7 +45,7 @@ public class CrewEntity extends BaseEntity {
     @OrderBy("start")
     @SortNatural
     private SortedSet<AssignmentEntity> assignments;
-//
+
 //    @OneToOne(fetch = FetchType.LAZY)
 //    @JoinColumn(name = "current_assignment_id")
 //    private AssignmentEntity currentAssignment;

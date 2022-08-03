@@ -5,6 +5,8 @@ import hu.bosch.bomple.crew.model.AssignmentEntity;
 import hu.bosch.bomple.crew.model.CrewEntity;
 import hu.bosch.bomple.ship.enums.ShipClass;
 import lombok.*;
+import org.hibernate.annotations.Fetch;
+import org.hibernate.annotations.FetchMode;
 import org.hibernate.annotations.Formula;
 import org.hibernate.annotations.Where;
 
@@ -19,6 +21,7 @@ import java.util.Set;
 @AllArgsConstructor
 @Entity
 @Table(name = "bosch_bomple_ship")
+//@Where(clause = "deleted is null or deleted = false")
 public class ShipEntity extends BaseEntity {
 
     @ToString.Include
@@ -50,7 +53,8 @@ public class ShipEntity extends BaseEntity {
 
     @ElementCollection(fetch = FetchType.LAZY)
     @CollectionTable(name = "bosch_bomple_armament", joinColumns = @JoinColumn(name = "ship_id"))
-    private List<ArmamentEmbeddable> armament;
+//    private List<ArmamentEmbeddable> armament;
+    private Set<ArmamentEmbeddable> armament;
 
     @OneToMany(fetch = FetchType.LAZY, mappedBy = "ship")
     @Where(clause = "end is null")
@@ -61,5 +65,7 @@ public class ShipEntity extends BaseEntity {
 
     @Formula("sqrt(position_x * position_x + position_y * position_y + position_z * position_z)")
     private Double distanceFromSol;
+
+//    private Boolean deleted;
 
 }

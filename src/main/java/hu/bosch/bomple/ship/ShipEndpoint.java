@@ -1,19 +1,25 @@
 package hu.bosch.bomple.ship;
 
-import hu.bosch.bomple.ship.dto.FeatureDto;
-import hu.bosch.bomple.ship.dto.FeatureSearchParameters;
+import hu.bosch.bomple.ship.dto.ShipDto;
+import hu.bosch.bomple.ship.service.AdvancedShipService;
+import hu.bosch.bomple.ship.service.ShipService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
-
-import java.net.URI;
-import java.net.URISyntaxException;
-import java.util.List;
 
 @RestController
 @RequiredArgsConstructor
 @RequestMapping("/ship")
 public class ShipEndpoint {
+
+    private final ShipService shipService;
+
+    @GetMapping("/{id}")
+    public ResponseEntity<ShipDto> fetchShip(@PathVariable Long id) {
+        return ResponseEntity.ok(shipService.fetch(id));
+    }
+
+
 //
 //    private final FeatureService featureService;
 //

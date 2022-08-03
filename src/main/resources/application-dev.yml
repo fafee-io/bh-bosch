@@ -6,4 +6,4 @@ spring:
     username: "root"
     password: "Macika42"
   liquibase:
-    drop-first: true
+    drop-first: false
