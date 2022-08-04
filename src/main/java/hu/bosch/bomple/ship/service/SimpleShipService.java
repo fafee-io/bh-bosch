@@ -7,8 +7,10 @@ import hu.bosch.bomple.ship.model.ShipEntity;
 import hu.bosch.bomple.ship.model.ShipRepository;
 import liquibase.pro.packaged.O;
 import lombok.RequiredArgsConstructor;
+import org.springframework.context.annotation.Primary;
 import org.springframework.context.annotation.Profile;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
 
@@ -22,6 +24,7 @@ public class SimpleShipService implements ShipService {
 
     @Override
     public ShipDto fetch(Long id) {
+        // TODO: hibernate session unwrapping
         return shipMapper.entityToDto(loadShip(id));
     }
 

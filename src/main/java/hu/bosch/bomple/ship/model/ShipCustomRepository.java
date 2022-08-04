@@ -25,6 +25,7 @@ public class ShipCustomRepository {
 //        Join<ShipEntity, ArmamentEmbeddable> armament = ship.join("armament", JoinType.INNER);
 
         Predicate predicate = cb.equal(ship.get("id"), id);
+
         query.select(cb.construct(
                 ShipDto.class,
                 ship.get(ShipEntity_.NAME),

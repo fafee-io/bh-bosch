@@ -6,6 +6,7 @@ import java.nio.charset.Charset;
 import java.nio.charset.StandardCharsets;
 
 public class ClasspathReader {
+
     protected final String getContent(String path, Charset charset) {
         InputStream inputStream = ClasspathReader.class.getClassLoader().getResourceAsStream(path);
 
@@ -23,4 +24,5 @@ public class ClasspathReader {
     protected final String getContent(String path) {
         return getContent(path, StandardCharsets.UTF_8);
     }
+
 }

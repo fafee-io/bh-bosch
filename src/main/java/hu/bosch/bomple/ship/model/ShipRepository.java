@@ -19,6 +19,9 @@ public interface ShipRepository extends JpaRepository<ShipEntity, Long>, JpaSpec
     @EntityGraph(attributePaths = {"captain", "compliment", "compliment.crew", "armament"})
     Optional<ShipEntity> findById(Long id);
 
+    @Query("UPDATE ShipEntity SET serviceRecord = ?1")
+    void updateEzAz(String serviceRecord);
+
 //    @Query("SELECT f FROM FeatureEntity f JOIN FETCH f.collection")
 //    List<FeatureEntity> findAllFetch();
 }

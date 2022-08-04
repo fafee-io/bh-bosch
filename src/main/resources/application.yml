@@ -19,6 +19,7 @@ spring:
       hibernate:
         format_sql: true
         order_inserts: true
-        batch_versioned_data: true
         jdbc:
           batch_size: 50
+        order_updates: true
+        batch_versioned_data: true
