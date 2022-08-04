@@ -5,7 +5,10 @@ import hu.bosch.bomple.ship.service.AdvancedShipService;
 import hu.bosch.bomple.ship.service.ShipService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.core.Authentication;
 import org.springframework.web.bind.annotation.*;
+
+import java.util.List;
 
 @RestController
 @RequiredArgsConstructor
@@ -17,6 +20,11 @@ public class ShipEndpoint {
     @GetMapping("/{id}")
     public ResponseEntity<ShipDto> fetchShip(@PathVariable Long id) {
         return ResponseEntity.ok(shipService.fetch(id));
+    }
+
+    @GetMapping("/list")
+    public ResponseEntity<List<ShipDto>> listShips() {
+        return ResponseEntity.ok(shipService.list());
     }
 
 
