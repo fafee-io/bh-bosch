@@ -1,0 +1,91 @@
+databaseChangeLog:
+  - changeSet:
+      id: create_ship_tables
+      author: afarkas
+      changes:
+        - createTable:
+            tableName: bosch_bomple_crew
+            columns:
+              - column:
+                  name: id
+                  type: bigint
+                  autoIncrement: true
+                  constraints:
+                    primaryKey: true
+                    nullable: false
+              - column:
+                  name: created
+                  type: timestamp
+              - column:
+                  name: created_by
+                  type: varchar(255)
+              - column:
+                  name: last_modified
+                  type: timestamp
+              - column:
+                  name: last_modified_by
+                  type: varchar(255)
+              - column:
+                  name: version
+                  type: bigint
+              - column:
+                  name: first_name
+                  type: varchar(150)
+              - column:
+                  name: last_name
+                  type: varchar(150)
+              - column:
+                  name: call_sign
+                  type: varchar(50)
+                  constraints:
+                    unique: true
+              - column:
+                  name: service_record
+                  type: text
+              - column:
+                  name: rank
+                  type: varchar(16)
+              - column:
+                  name: division
+                  type: varchar(16)
+              - column:
+                  name: current_assignment_id
+                  type: bigint
+
+        - createTable:
+            tableName: bosch_bomple_assignment
+            columns:
+              - column:
+                  name: id
+                  type: bigint
+                  autoIncrement: true
+                  constraints:
+                    primaryKey: true
+                    nullable: false
+              - column:
+                  name: created
+                  type: timestamp
+              - column:
+                  name: created_by
+                  type: varchar(255)
+              - column:
+                  name: last_modified
+                  type: timestamp
+              - column:
+                  name: last_modified_by
+                  type: varchar(255)
+              - column:
+                  name: version
+                  type: bigint
+              - column:
+                  name: start
+                  type: timestamp
+              - column:
+                  name: end
+                  type: timestamp
+              - column:
+                  name: ship_id
+                  type: bigint
+              - column:
+                  name: crew_id
+                  type: bigint

@@ -30,25 +30,21 @@ services:
 #      TOMCAT_ALLOW_REMOTE_MANAGEMENT: "true"
 
   # ENVIRONMENT
-#  service-registry:
-#    container_name: service-registry
-#    image: docker-registry.loginet.hu/instacash/instacash/service-registry:latest
-#    volumes:
-#      - ~/dev/fintrous/docker:/root/logs
-#    ports:
-#      - "127.0.0.1:8761:8761"
-#
-#  gateway:
-#    container_name: gateway
-#    image: docker-registry.loginet.hu/instacash/instacash/gateway:latest
-#    volumes:
-#      - ~/dev/fintrous/docker:/root/logs
-#    ports:
-#      - "8888:8080"
-#    environment:
-#      EUREKA_URI: http://service-registry:8761/eureka
-#    depends_on:
-#      - service-registry
+  service-registry:
+    container_name: service-registry
+    image: hu.bosch/bomple/service-registry:latest
+    ports:
+      - "127.0.0.1:8761:8761"
+
+  gateway:
+    container_name: gateway
+    image: hu.bosch/bomple/gateway:latest
+    ports:
+      - "8888:8888"
+    environment:
+      EUREKA_URI: http://service-registry:8761/eureka
+    depends_on:
+      - service-registry
 
 volumes:
   bosch-sql-data:

@@ -1,0 +1,43 @@
+---
+spring:
+  application:
+    name: "crew-service"
+  datasource:
+    url: "jdbc:mysql://prod-url:3310/bosch_db"
+    username: "root"
+    password: ""
+    driver-class-name: "com.mysql.cj.jdbc.Driver"
+  liquibase:
+    enabled: true
+    drop-first: true
+    change-log: "classpath:liquibase/init_master.yml"
+  jpa:
+    hibernate:
+      ddl-auto: validate
+    show-sql: true
+    properties:
+      hibernate:
+        format_sql: true
+        order_inserts: true
+        jdbc:
+          batch_size: 50
+        order_updates: true
+        batch_versioned_data: true
+
+eureka:
+  client:
+    fetch-registry: true
+    service-url:
+      defaultZone: ${EUREKA_URI:http://localhost:8761/eureka}
+
+bomple:
+  security:
+    issuer : bomple
+    audience: dev
+    jwtLifeTimeInSeconds : 300
+    generateKeys: false
+    secured-urls: "/**"
+    unprotected-urls: "/login"
+    public-key: "MFkwEwYHKoZIzj0CAQYIKoZIzj0DAQcDQgAEn7W5eiUbHBi0GKkPW9M2rBYZ4AsifHSq7eBfJpiMB+4tD7i+RRkK2lv80rtV2IJ6//r18jmuaJ3iw8nVHXAAvA=="
+    private-key: "MIGTAgEAMBMGByqGSM49AgEGCCqGSM49AwEHBHkwdwIBAQQgz+GvkdrMFcmII1boQH0lOfjgBJ6mvRBnnuzeayfq5bKgCgYIKoZIzj0DAQehRANCAASftbl6JRscGLQYqQ9b0zasFhngCyJ8dKrt4F8mmIwH7i0PuL5FGQraW/zSu1XYgnr/+vXyOa5oneLDydUdcAC8"
+

@@ -1,0 +1,29 @@
+spring:
+  application:
+    name: gateway
+  cloud:
+    gateway:
+      routes:
+      - id: authorizer
+        uri: lb://authorizer
+        predicates:
+          - Path=/auth/**
+
+      - id: ship-service
+        uri: lb://ship-service
+        predicates:
+          - Path=/ship/**
+
+      - id: crew-service
+        uri: lb://crew-service
+        predicates:
+          - Path=/crew/**
+
+server:
+  port: 8888
+
+eureka:
+  client:
+    register-with-eureka: false
+    service-url:
+      defaultZone: ${EUREKA_URI:http://localhost:8761/eureka}

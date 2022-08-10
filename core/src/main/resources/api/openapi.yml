@@ -1,0 +1,164 @@
+openapi: 3.0.0
+servers:
+  - url: 'https://bomple.Bosch.hu'
+    description: Bosch Bomple
+info:
+  description: "REST API for Bomple"
+  version: 0.1.0
+  title: Bosch Bomple API
+  termsOfService: 'https://bomple.bosch.hu'
+
+tags:
+  - name: Auth
+  - name: Ships
+
+paths:
+  /login:
+    post:
+      summary: Login
+      tags:
+        - Auth
+      operationId: login
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/LoginCredentials'
+      responses:
+        200:
+          description: kéccá'
+        400:
+          description: Invalid credentials
+        500:
+          description: öccá'
+
+  /ship/{shipId}:
+    get:
+      summary: Get a Ship's data by id
+      tags:
+        - Ships
+      operationId: getShip
+      parameters:
+        - in: path
+          name: shipId
+          required: true
+          schema:
+            type: integer
+            format: int64
+      responses:
+        200:
+          description: kéccá'
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/Ship'
+
+  /ship/list:
+    get:
+      summary: Get a list of Ships in the database
+      tags:
+        - Ships
+      operationId: listShip
+      responses:
+        200:
+          description: kéccá'
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/Ship'
+
+components:
+  schemas:
+    LoginCredentials:
+      description: Standard login request payload
+      properties:
+        user:
+          type: string
+          description: Username or Email
+        password:
+          type: string
+
+    Ship:
+      description: Ship DTO
+      properties:
+        name:
+          type: string
+        designation:
+          type: string
+        classification:
+          type: string
+        distanceFromSol:
+          type: number
+          format: double
+        armament:
+          type: array
+          items:
+            $ref: '#/components/schemas/Armament'
+        captain:
+          $ref: '#/components/schemas/Captain'
+        compliment:
+          type: array
+          items:
+            $ref: '#/components/schemas/Crew'
+        personnelCount:
+          type: integer
+          format: int32
+
+    Captain:
+      description: Captain DTO
+      properties:
+        name:
+          type: string
+        rank:
+          $ref: '#/components/schemas/Rank'
+
+    Crew:
+      description: CrewCompliment DTO
+      properties:
+        start:
+          type: string
+          format: 'date-time'
+        end:
+          type: string
+          format: 'date-time'
+        name:
+          type: string
+        division:
+          $ref: '#/components/schemas/Division'
+
+    Armament:
+      description: Armament DTO
+      properties:
+        name:
+          type: string
+        quantity:
+          type: integer
+          format: int32
+
+    Division:
+      type: string
+      enum:
+        - COMMAND
+        - OPERATIONS
+        - SCIENCES
+        - MEDICAL
+
+    Rank:
+      type: string
+      enum:
+        - CADET
+        - CORPORAL
+        - SERGEANT
+        - LIEUTENANT
+        - COMMANDER
+        - CAPTAIN
+        - ADMIRAL
+
+  links: {}
+  callbacks: {}
+
+security: []
