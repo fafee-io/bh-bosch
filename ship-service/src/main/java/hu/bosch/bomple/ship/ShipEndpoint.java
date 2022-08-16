@@ -1,6 +1,7 @@
 package hu.bosch.bomple.ship;
 
 import hu.bosch.bomple.api.model.Ship;
+import hu.bosch.bomple.ship.service.ShipProducer;
 import hu.bosch.bomple.ship.service.ShipService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
@@ -14,6 +15,7 @@ import java.util.List;
 public class ShipEndpoint {
 
     private final ShipService shipService;
+    private final ShipProducer shipProducer;
 
     @GetMapping("/{id}")
     public ResponseEntity<Ship> fetchShip(@PathVariable Long id) {
@@ -25,6 +27,11 @@ public class ShipEndpoint {
         return ResponseEntity.ok(shipService.list());
     }
 
+    @PostMapping()
+    public ResponseEntity<Void> produceShip() {
+        shipProducer.createShip();
+        return ResponseEntity.ok().build();
+    }
 
 //
 //    private final FeatureService featureService;

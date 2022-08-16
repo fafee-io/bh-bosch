@@ -23,6 +23,15 @@ spring:
           batch_size: 50
         order_updates: true
         batch_versioned_data: true
+  cloud:
+    stream:
+      bindings:
+        valami-in-0:
+          destination: valami-exchange
+          group: valami-queue
+        valami-out-0:
+          destination: valami-exchange
+          group: valami-queue
 
 eureka:
   client:

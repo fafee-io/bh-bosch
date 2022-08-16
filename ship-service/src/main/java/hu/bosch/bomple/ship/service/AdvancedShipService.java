@@ -1,6 +1,7 @@
 package hu.bosch.bomple.ship.service;
 
 import hu.bosch.bomple.api.model.Ship;
+import hu.bosch.bomple.common.ShipMessage;
 import hu.bosch.bomple.ship.model.ShipCustomRepository;
 import hu.bosch.bomple.ship.model.ShipEntity;
 import lombok.RequiredArgsConstructor;
@@ -29,5 +30,9 @@ public class AdvancedShipService implements ShipService {
     @Override
     public ShipEntity loadShip(Long id) {
         return null;
+    }
+
+    @Override
+    public void handleStreamMessage(ShipMessage message) {
     }
 }

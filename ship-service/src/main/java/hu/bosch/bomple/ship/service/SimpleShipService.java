@@ -3,6 +3,7 @@ package hu.bosch.bomple.ship.service;
 import hu.bosch.bomple.api.model.Ship;
 import hu.bosch.bomple.common.NotYetImplementedException;
 import hu.bosch.bomple.common.ResourceNotFoundException;
+import hu.bosch.bomple.common.ShipMessage;
 import hu.bosch.bomple.ship.ShipMapper;
 import hu.bosch.bomple.ship.model.ShipEntity;
 import hu.bosch.bomple.ship.model.ShipRepository;
@@ -38,6 +39,16 @@ public class SimpleShipService implements ShipService {
     public ShipEntity loadShip(Long id) {
         return shipRepository.findById(id).orElseThrow(() ->
                 new ResourceNotFoundException(ShipEntity.class, String.valueOf(id)));
+    }
+
+    @Override
+    public void handleStreamMessage(ShipMessage message) {
+        ShipEntity newShip = new ShipEntity();
+        newShip.setName(message.getName());
+        newShip.setDesignation(message.getDesignation());
+        newShip.setWeight(message.getWeight());
+
+        shipRepository.save(newShip);
     }
 
 }
