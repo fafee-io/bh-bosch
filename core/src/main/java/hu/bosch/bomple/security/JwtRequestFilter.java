@@ -52,6 +52,7 @@ public class JwtRequestFilter extends GenericFilterBean {
      * A doFilter "magyarul", a megfelelő típusokra castolva
      */
     public void doFilter(HttpServletRequest request, HttpServletResponse response, FilterChain chain) throws IOException, ServletException {
+        log.warn("Futunk! " + request.getRequestURL().toString());
         if (!requiresAuthentication(request)) {
             chain.doFilter(request, response);
             return; // védtelen patheken semmi dolgunk
@@ -59,8 +60,7 @@ public class JwtRequestFilter extends GenericFilterBean {
         try {
             Authentication authenticationResult = attemptAuthentication(request, response);
             successfulAuthentication(request, response, chain, authenticationResult);
-        }
-        catch (AuthenticationException ex) {
+        } catch (AuthenticationException ex) {
             log.warn(String.format("%s during authentication!", ex.getClass().getSimpleName()));
             unsuccessfulAuthentication(request, response, ex);
         }

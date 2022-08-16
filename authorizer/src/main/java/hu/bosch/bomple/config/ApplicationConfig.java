@@ -41,6 +41,12 @@ public class ApplicationConfig {
     }
 
     @Bean
+    public JwtRefreshService jwtRefreshService(RefreshRepository refreshRepository, JwtVerifier jwtVerifier,
+                                             JwtGenerator jwtGenerator, Clock clock) {
+        return new JwtRefreshService(refreshRepository, jwtVerifier, jwtGenerator, clock);
+    }
+
+    @Bean
     public JwtGenerator jwtGenerator(JwtSecurityProperties properties, AsymmetricKeyService keyService) {
         if (properties.isGenerateKeys()) {
             return new JwtGenerator(properties, keyService.generate().getPrivate());

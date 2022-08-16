@@ -25,14 +25,15 @@ public class JwtAuthenticationProvider implements AuthenticationProvider {
     public Authentication authenticate(Authentication authentication) throws AuthenticationException {
         String jwt = (String) authentication.getCredentials();
 
-        Claims claims = null;
+        Claims claims;
         try {
             claims = jwtVerifier.verifyAndUnpackJwt(jwt);
+            return statelessSessionService.jwtAuthenticationToken(claims, jwt);
         } catch (ExpiredJwtException ex) {
             String newJwt = autoLoginService.autoLogin(jwt);
             claims = jwtVerifier.verifyAndUnpackJwt(newJwt);
+            return statelessSessionService.jwtAuthenticationToken(claims, newJwt);
         }
-        return statelessSessionService.jwtAuthenticationToken(claims, jwt);
     }
 
     @Override
