@@ -1,6 +1,7 @@
 package hu.bosch.bomple.ship.service;
 
 import hu.bosch.bomple.api.model.Ship;
+import hu.bosch.bomple.common.NotYetImplementedException;
 import hu.bosch.bomple.common.ResourceNotFoundException;
 import hu.bosch.bomple.ship.ShipMapper;
 import hu.bosch.bomple.ship.model.ShipEntity;
@@ -28,9 +29,9 @@ public class SimpleShipService implements ShipService {
     }
 
     @Override
-    @Secured("list_ships")
+//    @Secured("list_ships")
     public List<Ship> list() {
-        return null;
+        throw new NotYetImplementedException("listShips");
     }
 
     @Override

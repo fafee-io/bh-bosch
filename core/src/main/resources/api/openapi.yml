@@ -139,6 +139,19 @@ components:
           type: integer
           format: int32
 
+    ErrorMessage:
+      description: Returned on custom business logic exceptions
+      properties:
+        code:
+          type: integer
+          format: int32
+        token:
+          type: string
+        defaultMessage:
+          type: string
+        additionalMessage:
+          type: string
+
     Division:
       type: string
       enum:
