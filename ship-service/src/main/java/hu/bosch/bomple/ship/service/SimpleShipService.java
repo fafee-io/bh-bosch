@@ -1,6 +1,7 @@
 package hu.bosch.bomple.ship.service;
 
 import hu.bosch.bomple.api.model.Ship;
+import hu.bosch.bomple.aspect.Timed;
 import hu.bosch.bomple.common.NotYetImplementedException;
 import hu.bosch.bomple.common.ResourceNotFoundException;
 import hu.bosch.bomple.common.ShipMessage;
@@ -24,6 +25,7 @@ public class SimpleShipService implements ShipService {
 
     @Override
     @Secured("fetch_ship")
+    @Timed
     public Ship fetch(Long id) {
         // TODO: hibernate session unwrapping
         return shipMapper.entityToDto(loadShip(id));

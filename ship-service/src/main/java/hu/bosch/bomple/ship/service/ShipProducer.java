@@ -1,5 +1,6 @@
 package hu.bosch.bomple.ship.service;
 
+import hu.bosch.bomple.aspect.Timed;
 import hu.bosch.bomple.common.ShipMessage;
 import hu.bosch.bomple.generator.SecretService;
 import lombok.RequiredArgsConstructor;
@@ -13,6 +14,7 @@ public class ShipProducer {
     private final StreamBridge streamBridge;
     private final SecretService secretService;
 
+    @Timed
     public void createShip() {
         ShipMessage request = new ShipMessage();
 
