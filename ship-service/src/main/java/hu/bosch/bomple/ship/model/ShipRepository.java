@@ -14,8 +14,8 @@ public interface ShipRepository extends JpaRepository<ShipEntity, Long>, JpaSpec
 //    @Query("SELECT s FROM ShipEntity s JOIN FETCH s.captain JOIN FETCH s.compliment c JOIN FETCH c.crew WHERE s.id = ?1")
 //    ShipEntity findOneFetch(Long id);
 
-    @EntityGraph(attributePaths = {"captain", "compliment", "compliment.crew", "armament"})
-    Optional<ShipEntity> findById(Long id);
+//    @EntityGraph(attributePaths = {"captain", "compliment", "compliment.crew", "armament"})
+//    Optional<ShipEntity> findById(Long id);
 
     @Query("UPDATE ShipEntity SET serviceRecord = ?1")
     void updateEzAz(String serviceRecord);

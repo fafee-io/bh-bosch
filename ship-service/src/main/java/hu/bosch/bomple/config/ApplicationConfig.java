@@ -12,6 +12,8 @@ import org.springframework.data.jpa.repository.config.EnableJpaRepositories;
 import java.time.Clock;
 import java.time.ZoneId;
 
+import static java.lang.Math.abs;
+
 @Configuration
 @EnableJpaRepositories(basePackages = {"hu.bosch.bomple"})
 @EntityScan(basePackages = {"hu.bosch.bomple"})
@@ -28,7 +30,7 @@ public class ApplicationConfig {
     private void interjuKerdes() {
         double niceValue = 32.5d;
         double measuredValue = bonyolultKalkulacio();
-        if (niceValue == measuredValue) {
+        if (abs(niceValue - measuredValue) < 0.00001d) {
             System.out.println("Happiness");
         } else {
             System.out.println("Sadness");

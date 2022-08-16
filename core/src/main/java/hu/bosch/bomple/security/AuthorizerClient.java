@@ -9,9 +9,9 @@ public interface AuthorizerClient {
 
     @RequestMapping(
             method = {RequestMethod.POST},
-            value = {"/authorizer/refresh"})
+            value = {"/auth/refresh"})
     ResponseEntity<Void> autoLogin();
-//
+
 //    @RequestMapping(
 //            method = RequestMethod.PUT,
 //            value = "/authorizer/user/{userId}")

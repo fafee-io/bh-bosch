@@ -18,7 +18,7 @@ public class JwtAuthenticationProvider implements AuthenticationProvider {
 
     private final JwtVerifier jwtVerifier;
     private final StatelessSessionService statelessSessionService;
-//    private final AuthorizerClient authorizerClient;
+    private final AutoLoginService autoLoginService;
 //    private final RestTemplate restTemplate;
 
     @Override
@@ -28,12 +28,11 @@ public class JwtAuthenticationProvider implements AuthenticationProvider {
         Claims claims = null;
         try {
             claims = jwtVerifier.verifyAndUnpackJwt(jwt);
-        } catch (RuntimeException ex) {
-//            authorizerClient.autoLogin();
-//            throw new BadCredentialsException("Lejárt volt a JWT!");
+        } catch (ExpiredJwtException ex) {
+            String newJwt = autoLoginService.autoLogin(jwt);
+            claims = jwtVerifier.verifyAndUnpackJwt(newJwt);
         }
-        return statelessSessionService.jwtAuthenticationToken(claims);
-
+        return statelessSessionService.jwtAuthenticationToken(claims, jwt);
     }
 
     @Override

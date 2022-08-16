@@ -17,6 +17,18 @@ services:
       MYSQL_CHARACTER_SET: "utf8mb4"
       MYSQL_COLLATE: "utf8mb4_unicode_ci"
 
+  bosch-mongodb:
+    image: mongo:5.0
+    restart: always
+    volumes:
+      - bosch-mongo-data:/data/db
+    ports:
+      - "127.0.0.1:27017:27017"
+    container_name: bosch-mongodb
+    environment:
+      MONGO_INITDB_ROOT_USERNAME: bomple
+      MONGO_INITDB_ROOT_PASSWORD: "Macika43"
+
 #  tomcat:
 #    image: bitnami/tomcat:9.0.63
 #    restart: always
@@ -49,3 +61,5 @@ services:
 volumes:
   bosch-sql-data:
     name: bosch-sql-data
+  bosch-mongo-data:
+    name: bosch-mongo-data

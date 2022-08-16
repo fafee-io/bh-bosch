@@ -69,10 +69,11 @@ public class JwtRequestFilter extends GenericFilterBean {
 
     private Authentication attemptAuthentication(HttpServletRequest request, HttpServletResponse response)
             throws AuthenticationException, IOException, ServletException {
-        String jwt = request.getHeader("Authorization").substring(7);
+        String jwt = request.getHeader("Authorization");
         if (!StringUtils.hasText(jwt)) {
             throw new BadCredentialsException("házi feladat");
         }
+        jwt = jwt.substring(7);
         JwtAuthenticationToken authentication = new JwtAuthenticationToken(jwt);
 
         return authProvider.authenticate(authentication);

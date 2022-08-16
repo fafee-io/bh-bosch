@@ -8,11 +8,11 @@ import java.util.Collections;
 public class StatelessSessionService {
 
     // TODO: név
-    public JwtAuthenticationToken jwtAuthenticationToken(Claims claims){
+    public JwtAuthenticationToken jwtAuthenticationToken(Claims claims, String packedJwt){
         Long userId = Long.valueOf(claims.getSubject());
         String role = (String) claims.get("role");
 
-        return new JwtAuthenticationToken(null, userId,
+        return new JwtAuthenticationToken(packedJwt, userId,
                 Collections.singletonList(new SimpleGrantedAuthority(role)));
     }
 

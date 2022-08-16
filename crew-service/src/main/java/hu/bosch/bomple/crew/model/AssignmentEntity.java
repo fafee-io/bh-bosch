@@ -25,7 +25,6 @@ public class AssignmentEntity extends BaseEntity implements Comparable<Assignmen
 //    @ManyToOne(fetch = FetchType.LAZY)
 //    @JoinColumn(name = "ship_id")
 //    private ShipEntity ship;
-
     private Long shipId;
 
     @ManyToOne(fetch = FetchType.LAZY)

@@ -22,12 +22,11 @@ public class JwtVerifier {
         Instant instant = Instant.ofEpochMilli(issuedAt.getTime());
         Instant expiration = instant.plus(lifeTimeInSeconds, ChronoUnit.SECONDS);
         Instant now = Instant.now();
-        if(expiration.isBefore(now)){
-            //TODO custom exception
-            throw new RuntimeException("valami rendes exception");
+
+        if (expiration.isBefore(now)) {
+            throw new ExpiredJwtException("Lejárt", claims.getBody());
         }
-        // TODO: lifetimeseconds ellenőrzés "iat" claimből (clock!)
-        // TODO: issuer ellenőrzése
+
         return claims.getBody();
     }
 

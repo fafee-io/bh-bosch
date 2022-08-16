@@ -22,7 +22,7 @@ import java.util.Base64;
 public class JwtSecurityConfig {
 
     @Bean
-    public SecurityFilterChain filterChain(HttpSecurity http, JwtRequestFilter jwtRequestFilter, JwtSecurityProperties properties) throws Exception {
+    public SecurityFilterChain filterChain(HttpSecurity http, JwtRequestFilter jwtRequestFilter, JwtResponseFilter jwtResponseFilter, JwtSecurityProperties properties) throws Exception {
         http
                 .csrf().disable()
                 .formLogin().disable()
@@ -30,6 +30,7 @@ public class JwtSecurityConfig {
                 .sessionManagement().sessionCreationPolicy(SessionCreationPolicy.STATELESS)
                 .and()
                 .addFilterAfter(jwtRequestFilter, UsernamePasswordAuthenticationFilter.class)
+                .addFilterAfter(jwtResponseFilter, JwtRequestFilter.class)
                 .authorizeRequests()
                 .antMatchers(properties.getUnprotectedUrls()).permitAll()
                 .antMatchers(properties.getSecuredUrls()).authenticated();
@@ -51,13 +52,23 @@ public class JwtSecurityConfig {
     }
 
     @Bean
-    public AuthenticationProvider authProvider(JwtVerifier jwtVerifier, StatelessSessionService statelessSessionService){
-        return new JwtAuthenticationProvider(jwtVerifier, statelessSessionService);
+    public AuthenticationProvider authProvider(JwtVerifier jwtVerifier, StatelessSessionService statelessSessionService, AutoLoginService autoLoginService){
+        return new JwtAuthenticationProvider(jwtVerifier, statelessSessionService, autoLoginService);
     }
 
     @Bean
     public JwtRequestFilter jwtRequestFilter(AuthenticationProvider authProvider, JwtSecurityProperties properties){
         return new JwtRequestFilter(authProvider, properties.getSecuredUrls(), properties.getUnprotectedUrls());
+    }
+
+    @Bean
+    public JwtResponseFilter jwtResponseFilter(JwtFacade jwtFacade) {
+        return new JwtResponseFilter(jwtFacade);
+    }
+
+    @Bean
+    public AutoLoginService autoLoginService(AuthorizerClient client) {
+        return new RemoteAutoLoginService(client);
     }
 
     // !!!!!!!!!!!

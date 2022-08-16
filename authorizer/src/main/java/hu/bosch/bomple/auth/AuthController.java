@@ -24,4 +24,9 @@ public class AuthController {
         return ResponseEntity.ok().headers(headers).build();
     }
 
+    @PostMapping("/auth/refresh")
+    public ResponseEntity<Void> autoLogin() {
+        return ResponseEntity.ok().build();
+    }
+
 }
