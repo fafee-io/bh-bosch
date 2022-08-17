@@ -11,6 +11,8 @@ import java.util.Optional;
 @Repository
 public interface ShipRepository extends JpaRepository<ShipEntity, Long>, JpaSpecificationExecutor<ShipEntity> {
 
+    Optional<ShipEntity> findById(Long id);
+
 //    @Query("SELECT s FROM ShipEntity s JOIN FETCH s.captain JOIN FETCH s.compliment c JOIN FETCH c.crew WHERE s.id = ?1")
 //    ShipEntity findOneFetch(Long id);
 

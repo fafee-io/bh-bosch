@@ -20,24 +20,27 @@ public class BompleAspect {
 
     private final Clock clock;
 
-    @Pointcut("within(hu.bosch.bomple.ship.model.ShipRepository)")
+    @Pointcut("target(hu.bosch.bomple.ship.model.ShipRepository)")
+//    @Pointcut("@target(org.springframework.stereotype.Repository)")
     private void shipRepository() {}
 
-    @Pointcut("execution(* *..find*(Long,..))")
+    @Pointcut("execution(* find*(Long))")
     public void repositoryFinds() {}
 
+    // Advice begin
     @Before("repositoryFinds()")
     public void logSearchedId(JoinPoint jp) {
         log.info("Repository method called: " + jp.getSignature().getName());
         log.info(String.valueOf(jp.getArgs()[0]));
     }
+    // Advice end
 
     @AfterReturning(value = "shipRepository()", returning = "entity")
     public void entityReturned(JoinPoint jp, Object entity) {
         if (ShipEntity.class.isAssignableFrom(entity.getClass())) {
             log.info("A visszaadott objektum egy űrhajó!");
         } else {
-            log.info("Nagy a baj!");
+            log.warn("Nagy a baj!");
         }
     }
 

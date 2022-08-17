@@ -20,3 +20,15 @@ BCrypt hash: 12$só$hash
 -------- 
 -------- SecurityPersistenceFilter
 Servlet
+
+AoP fogalmak:
+
+Aspect
+
+Advice
+
+PointCut
+
+JoinPoint
+
+Weaving
