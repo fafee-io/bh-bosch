@@ -25,6 +25,10 @@ public class JwtFacade {
     }
 
     public Long getCurrentUserId() {
-        return (Long) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+        if (isLoggedIn()) {
+            return (Long) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+        } else {
+            return null;
+        }
     }
 }

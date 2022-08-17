@@ -23,6 +23,12 @@ spring:
           batch_size: 50
         order_updates: true
         batch_versioned_data: true
+
+  rabbitmq:
+    host: ${RABBIT_HOST:localhost}
+    port: 5672
+    username: root
+    password: almafa
   cloud:
     stream:
       bindings:

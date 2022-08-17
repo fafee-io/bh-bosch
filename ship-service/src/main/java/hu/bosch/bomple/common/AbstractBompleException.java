@@ -7,7 +7,7 @@ import org.springframework.http.HttpStatus;
 
 @RequiredArgsConstructor
 @Getter
-public class AbstractBompleException extends RuntimeException {
+public abstract class AbstractBompleException extends RuntimeException {
 
     private final HttpStatus httpStatus;
     private final ErrorCode errorCode;

@@ -8,6 +8,10 @@ import hu.bosch.bomple.security.ExpiredJwtException;
 import hu.bosch.bomple.security.JwtVerifier;
 import io.jsonwebtoken.Claims;
 import lombok.RequiredArgsConstructor;
+import org.springframework.data.mongodb.core.MongoTemplate;
+import org.springframework.data.mongodb.core.query.Criteria;
+import org.springframework.data.mongodb.core.query.Query;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.security.SecureRandom;
 import java.time.Clock;
@@ -21,9 +25,11 @@ public class JwtRefreshService implements AutoLoginService {
     private final JwtVerifier jwtVerifier;
     private final JwtGenerator generator;
     private final Clock clock;
+//    private final MongoTemplate mongoTemplate;
     private final Random random = new SecureRandom();
 
     @Override
+//    @Transactional
     public String autoLogin(String currentJwt) {
         Claims claims;
         try {
@@ -32,6 +38,9 @@ public class JwtRefreshService implements AutoLoginService {
             claims = ex.getClaims();
         }
         RefreshEntity refresh = refreshRepository.findByUserIdAndGeneration(Long.valueOf((String) claims.get("sub")),(String) claims.get("rfshg"));
+//        Query query = new Query();
+//        query.addCriteria(Criteria.where("userId").is(Long.valueOf((String) claims.get("sub"))).andOperator(Criteria.where("generation").is((String) claims.get("rfshg"))));
+//        RefreshEntity refresh = mongoTemplate.findOne(query, RefreshEntity.class);
         // todo: türelmi idő bevezetése
         // refresh + néhány másodpercen belül a következő ellenőrzés ne történjen meg, hanem a DB beli tokent küldjük újra
         if (refresh.getToken().equals(claims.get("rfsht"))) {

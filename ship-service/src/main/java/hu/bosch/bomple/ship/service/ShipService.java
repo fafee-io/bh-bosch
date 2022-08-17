@@ -14,4 +14,5 @@ public interface ShipService {
     List<Ship> list();
     ShipEntity loadShip(Long id);
     void handleStreamMessage(ShipMessage message);
+
 }

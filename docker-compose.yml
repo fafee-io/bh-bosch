@@ -29,6 +29,16 @@ services:
       MONGO_INITDB_ROOT_USERNAME: bomple
       MONGO_INITDB_ROOT_PASSWORD: "Macika43"
 
+  rabbit:
+    container_name: rabbit
+    image: rabbitmq:3.8.5-management
+    ports:
+      - "127.0.0.1:8081:8080"
+      - "127.0.0.1:5672:5672"
+    environment:
+      RABBITMQ_DEFAULT_USER: root
+      RABBITMQ_DEFAULT_PASS: almafa
+
 #  tomcat:
 #    image: bitnami/tomcat:9.0.63
 #    restart: always

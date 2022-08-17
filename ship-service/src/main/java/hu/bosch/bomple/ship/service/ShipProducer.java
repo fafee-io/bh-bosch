@@ -14,7 +14,7 @@ public class ShipProducer {
     private final StreamBridge streamBridge;
     private final SecretService secretService;
 
-    @Timed
+//    @Timed
     public void createShip() {
         ShipMessage request = new ShipMessage();
 

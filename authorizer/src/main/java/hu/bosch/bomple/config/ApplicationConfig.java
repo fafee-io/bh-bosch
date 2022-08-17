@@ -15,6 +15,8 @@ import org.springframework.context.annotation.Configuration;
 import org.springframework.context.annotation.Primary;
 import org.springframework.data.jpa.repository.config.EnableJpaAuditing;
 import org.springframework.data.jpa.repository.config.EnableJpaRepositories;
+import org.springframework.data.mongodb.MongoDatabaseFactory;
+import org.springframework.data.mongodb.MongoTransactionManager;
 import org.springframework.data.mongodb.repository.config.EnableMongoRepositories;
 
 import java.time.Clock;
@@ -27,6 +29,11 @@ import java.time.ZoneId;
 @EnableJpaAuditing
 @EnableBompleSecurity
 public class ApplicationConfig {
+
+    @Bean
+    public MongoTransactionManager mongoTransactionManager(MongoDatabaseFactory mongoDbFactory) {
+        return new MongoTransactionManager(mongoDbFactory);
+    }
 
     @Bean
     public Clock clock() {
