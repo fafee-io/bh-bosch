@@ -9,6 +9,8 @@ public interface RefreshRepository extends MongoRepository<RefreshEntity, String
 
     RefreshEntity findByUserIdAndGeneration(Long userId, String generation);
 
+    List<RefreshEntity> findByTokenStartsWith(String prefix);
+
     @Query("{'userId': ?0, 'generation': ?1}")
     RefreshEntity findForRefresh(Long userId, String generation);
 

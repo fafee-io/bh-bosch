@@ -14,6 +14,7 @@ import java.util.Set;
 @NoArgsConstructor
 @AllArgsConstructor
 @Entity
+@Builder
 @Table(name = "bosch_bomple_ship")
 //@Where(clause = "deleted is null or deleted = false")
 public class ShipEntity extends BaseEntity {

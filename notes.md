@@ -1,5 +1,7 @@
 # Notes
 
+### Az alkalmazások csak akkor futnak, ha a "dev" profil aktiválva van!
+
 - OWASP Top 10
 
 Kódolás:
